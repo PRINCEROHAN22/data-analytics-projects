@@ -50,3 +50,21 @@ plt.ylabel('sales')
 plt.xticks(rotation=45)
 plt.savefig('sales_by_segment.png')
 plt.close()
+
+plt.figure()
+plt.scatter(x=df['Sales'],y=df['Profit'],color="yellow")
+plt.xlabel('sales')
+plt.ylabel('profit')
+plt.xticks(rotation=45)
+plt.savefig('sales_vs_profit.png')
+plt.close
+
+total_sales = df['Sales'].sum()
+total_profit = df['Profit'].sum()
+highest_profit_category = df.groupby('Category')['Profit'].idxmax()
+lowest_profit_region = df.groupby('Region')['Profit'].idxmin()
+
+print(f"\nTotal Number Of Sales Across All Orders : {total_sales}")
+print(f"\nTotal Profit Across All Orders : {total_profit}")
+print(f"\nHighest Profit Among Category : {highest_profit_category}")
+print(f"\nLowest Profit Among Region : {lowest_profit_region}")
