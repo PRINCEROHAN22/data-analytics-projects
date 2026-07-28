@@ -22,11 +22,12 @@ This project analyzes sales data from a Superstore dataset using Python, Pandas,
 - `sales_by_segment.png` — Pie chart
 - `sales_vs_profit.png` — Scatter plot
 
-## How to Run
-```bash
-python filename.py
-
 ## Tools Used
 - Python
 - Pandas
 - Matplotlib
+
+## How to Run
+```bash
+python filename.py
+
