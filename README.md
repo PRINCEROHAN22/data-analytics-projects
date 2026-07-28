@@ -26,7 +26,7 @@ This project analyzes sales data from a Superstore dataset using Python, Pandas,
 ```bash
 python filename.py
 
-Tools Used:
-Python
-Pandas
-Matplotlib
+## Tools Used
+- Python
+- Pandas
+- Matplotlib
