@@ -1,6 +1,7 @@
 import pandas as pd 
 import matplotlib.pyplot as plt
 import streamlit as st 
+import google.generativeai as genai
 
 st.title("Sales Dashboard")
 st.write("Analysis of Superstore sales data")
@@ -70,10 +71,37 @@ plt.close
 
 total_sales = df['Sales'].sum()
 total_profit = df['Profit'].sum()
-highest_profit_category = df.groupby('Category')['Profit'].idxmax()
-lowest_profit_region = df.groupby('Region')['Profit'].idxmin()
+category_profits = df.groupby('Category')['Profit'].sum()
+highest_profit_category = category_profits.idxmax()
+region_profits = df.groupby('Region')['Profit'].sum()
+lowest_profit_region = region_profits.idxmin()
 
 st.write(f"\nTotal Number Of Sales Across All Orders : {total_sales}")
 st.write(f"\nTotal Profit Across All Orders : {total_profit}")
 st.write(f"\nHighest Profit Among Category : {highest_profit_category}")
 st.write(f"\nLowest Profit Among Region : {lowest_profit_region}")
+
+#Rule-based insight generation: analyzes data pattern and generates
+#buisness recommendations using conditional logic 
+st.subheader("🤖 Automated Business Insight")
+
+insight_parts = []
+
+if highest_profit_category == "Technology":
+    insight_parts.append("Technology drives the highest profit margins. Consider expanding tech inventory and bundling accessories.")
+elif highest_profit_category == "Furniture":
+    insight_parts.append("Furniture leads in profitability. Focus marketing campaigns on high-margin furniture lines.")
+else:
+    insight_parts.append(f"{highest_profit_category} is your top-performing category. Allocate more budget to this segment.")
+
+insight_parts.append(f"Total sales reached ₹{total_sales:,.0f} with an overall profit of ₹{total_profit:,.0f}.")
+
+if lowest_profit_region == "Central":
+    insight_parts.append("The Central region shows the lowest profitability — investigate discounting practices or shipping cost leakage.")
+else:
+    insight_parts.append(f"Attention needed: {lowest_profit_region} region underperforms. Review pricing strategy there.")
+
+ai_insight = " ".join(insight_parts)
+st.write(ai_insight)
+
+#st.write(response.text)
